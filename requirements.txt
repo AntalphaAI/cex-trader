@@ -1,0 +1,7 @@
+# cex-trader skill — Python dependencies
+# The CLI script uses only Python standard library (no third-party deps required)
+# Backend MCP server dependencies are in the backend repository:
+#   antalpha-com/antalpha-skills
+
+# Optional: for development/testing
+# requests>=2.28.0
