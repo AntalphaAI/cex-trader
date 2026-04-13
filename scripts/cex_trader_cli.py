@@ -4,9 +4,13 @@ cex-trader CLI — Unified CEX Trading Capability Layer
 Calls the cex-trader MCP server tools via HTTP.
 
 Usage:
+    python cex_trader_cli.py setup check
+    python cex_trader_cli.py setup save --exchange binance --apiKey KEY --secretKey SECRET
+    python cex_trader_cli.py setup verify --exchange binance
     python cex_trader_cli.py spot place --exchange okx --instId BTC-USDT --side buy --ordType limit --sz 0.001 --px 50000
-    python cex_trader_cli.py futures place --exchange okx --instId BTC-USDT-SWAP --action open_long --ordType market --sz 1 --leverage 10
-    python cex_trader_cli.py futures positions --exchange okx
+    python cex_trader_cli.py spot place --exchange binance --instId BTC-USDT --side buy --ordType limit --sz 0.001 --px 50000
+    python cex_trader_cli.py futures place --exchange binance --instId BTC-USDT-SWAP --action open_long --ordType market --sz 1 --leverage 10
+    python cex_trader_cli.py futures positions --exchange binance
     python cex_trader_cli.py futures leverage --exchange okx --instId BTC-USDT-SWAP --leverage 10 --mgnMode isolated
     python cex_trader_cli.py futures close --exchange okx --instId BTC-USDT-SWAP
     python cex_trader_cli.py account balance --exchange okx
@@ -138,6 +142,28 @@ def cmd_futures_close(args):
     print_result(call_tool("cex-futures-close-position", params))
 
 
+# ── Setup commands ────────────────────────────────────────────────────────────
+
+def cmd_setup_check(args):
+    print_result(call_tool("cex-setup-check", {}))
+
+
+def cmd_setup_save(args):
+    params = {
+        "exchange": args.exchange,
+        "apiKey": args.apiKey,
+        "secretKey": args.secretKey,
+    }
+    if args.passphrase:
+        params["passphrase"] = args.passphrase
+    print_result(call_tool("cex-setup-save", params))
+
+
+def cmd_setup_verify(args):
+    params = {"exchange": args.exchange}
+    print_result(call_tool("cex-setup-verify", params))
+
+
 # ── Account commands ───────────────────────────────────────────────────────────
 
 def cmd_account_balance(args):
@@ -158,6 +184,24 @@ def build_parser():
         formatter_class=argparse.RawDescriptionHelpFormatter,
     )
     sub = parser.add_subparsers(dest="module", required=True)
+
+    # ── setup ──
+    setup = sub.add_parser("setup", help="API credential setup commands")
+    setup_sub = setup.add_subparsers(dest="command", required=True)
+
+    s_check = setup_sub.add_parser("check", help="Check if credentials are configured")
+    s_check.set_defaults(func=cmd_setup_check)
+
+    s_save = setup_sub.add_parser("save", help="Save API credentials")
+    s_save.add_argument("--exchange", required=True, choices=["okx", "binance"])
+    s_save.add_argument("--apiKey", required=True, help="API Key")
+    s_save.add_argument("--secretKey", required=True, help="API Secret")
+    s_save.add_argument("--passphrase", help="Passphrase (required for OKX)")
+    s_save.set_defaults(func=cmd_setup_save)
+
+    s_verify = setup_sub.add_parser("verify", help="Verify credentials via test API call")
+    s_verify.add_argument("--exchange", required=True, choices=["okx", "binance"])
+    s_verify.set_defaults(func=cmd_setup_verify)
 
     # ── spot ──
     spot = sub.add_parser("spot", help="Spot trading commands")
