@@ -74,7 +74,7 @@ metadata:
 
 # cex-trader
 
-> v2.0.1 · Unified CEX Trading Capability Layer for AI Agents
+> v2.0.2 · Unified CEX Trading Capability Layer for AI Agents
 
 ⚠️ **Risk Warning**: Futures trading involves high leverage and may result in significant losses.
 Only use funds you can afford to lose.
