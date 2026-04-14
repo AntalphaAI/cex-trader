@@ -6,10 +6,10 @@
 
 # cex-trader
 
-> v2.0.0 · Unified CEX Trading Capability Layer for AI Agents
+> v2.0.1 · Unified CEX Trading Capability Layer for AI Agents
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Version](https://img.shields.io/badge/version-2.0.0-blue.svg)](https://github.com/AntalphaAI/cex-trader)
+[![Version](https://img.shields.io/badge/version-2.0.1-blue.svg)](https://github.com/AntalphaAI/cex-trader)
 
 ⚠️ **Risk Warning**: Futures/perpetual contract trading involves high leverage and significant risk of loss. Only use funds you can afford to lose entirely.
 
@@ -228,7 +228,9 @@ margin_danger_ratio = 1.02
 
 ## Security
 
-- API keys stored via environment variables only (never in config files)
+- API keys are stored in environment variables (`CEX_OKX_*` / `CEX_BINANCE_*`) and transmitted to the MCP server when `cex-setup-save` is called
+- The MCP server URL is `https://mcp.antalpha.com/cex-trader` (hosted) or override via `MCP_SERVER_URL=http://localhost:3000` for self-hosted
+- `~/.trader/config.toml` (written by `install.sh`) stores **risk parameters only** — never API keys
 - Withdrawal and transfer permissions **must NOT** be granted to the API key
 - IP allowlist recommended
 - Built-in rate limiting (token bucket algorithm)
@@ -237,6 +239,11 @@ margin_danger_ratio = 1.02
 ---
 
 ## Changelog
+
+### v2.0.1 (2026-04-14)
+- **Docs**: Declared required env vars (`CEX_OKX_*`, `CEX_BINANCE_*`, `MCP_SERVER_URL`) in SKILL.md metadata
+- **Docs**: Clarified credential transmission path — env vars → MCP server; `~/.trader/config.toml` stores risk params only
+- **Docs**: Aligned `MCP_SERVER_URL` default (`localhost:3000`) with hosted MCP URL in SKILL.md
 
 ### v2.0.0 (2026-04-13)
 - **Added**: Full Binance exchange support — Spot + Futures (MVP-β, production ready)
@@ -265,7 +272,7 @@ margin_danger_ratio = 1.02
 
 # cex-trader（中文说明）
 
-> v2.0.0 · 面向 AI Agent 的统一 CEX 交易能力层
+> v2.0.1 · 面向 AI Agent 的统一 CEX 交易能力层
 
 ⚠️ **风险提示**：合约/永续合约交易涉及高杠杆，存在重大亏损风险，请仅使用可以承受全部损失的资金。
 
@@ -353,6 +360,11 @@ mcp.call("cex-futures-place-order", {
 ---
 
 ## 更新日志
+
+### v2.0.1 (2026-04-14)
+- **文档**：在 SKILL.md 元数据中声明所需环境变量（`CEX_OKX_*`、`CEX_BINANCE_*`、`MCP_SERVER_URL`）
+- **文档**：明确凭证传输路径 — 环境变量 → MCP 服务器；`~/.trader/config.toml` 仅存风控参数
+- **文档**：统一 `MCP_SERVER_URL` 默认值说明（`localhost:3000`）与 SKILL.md 中托管 URL 的关系
 
 ### v2.0.0 (2026-04-13)
 - **新增**：完整 Binance 交易所支持 — 现货 + 合约（MVP-β，生产就绪）

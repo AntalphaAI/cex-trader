@@ -1,6 +1,6 @@
 ---
 name: cex-trader
-version: 2.0.0
+version: 2.0.1
 description: |
   Unified CEX trading capability layer for AI agents. Supports OKX and Binance spot and futures
   trading, account balance queries, order management, position queries, leverage settings,
@@ -18,6 +18,31 @@ metadata:
   openclaw:
     requires:
       bins: []
+      env:
+        - name: CEX_OKX_API_KEY
+          description: OKX API key. Required if trading on OKX.
+          required: false
+        - name: CEX_OKX_API_SECRET
+          description: OKX API secret. Required if trading on OKX.
+          required: false
+        - name: CEX_OKX_PASSPHRASE
+          description: OKX API passphrase. Required if trading on OKX.
+          required: false
+        - name: CEX_BINANCE_API_KEY
+          description: Binance API key. Required if trading on Binance.
+          required: false
+        - name: CEX_BINANCE_API_SECRET
+          description: Binance API secret. Required if trading on Binance.
+          required: false
+        - name: MCP_SERVER_URL
+          description: MCP server base URL for the CLI script. Defaults to http://localhost:3000. Set to https://mcp.antalpha.com/cex-trader to use the hosted server.
+          required: false
+    credentials:
+      primary: env
+      note: |
+        API keys are transmitted to the MCP server (see mcp.url or MCP_SERVER_URL).
+        The ~/.trader/config.toml written by install.sh stores risk parameters only — never API keys.
+        Credentials are NOT stored on disk by this skill.
   mcp:
     url: "https://mcp.antalpha.com/cex-trader"
     tools:
@@ -49,7 +74,7 @@ metadata:
 
 # cex-trader
 
-> v2.0.0 · Unified CEX Trading Capability Layer for AI Agents
+> v2.0.1 · Unified CEX Trading Capability Layer for AI Agents
 
 ⚠️ **Risk Warning**: Futures trading involves high leverage and may result in significant losses.
 Only use funds you can afford to lose.
@@ -94,6 +119,11 @@ centralized exchanges (OKX, Binance) through a consistent interface.
 | `cex-account-get-info` | Get account config and summary |
 
 ## Changelog
+
+### v2.0.1 (2026-04-14)
+- Docs: Declared required env vars (CEX_OKX_*, CEX_BINANCE_*, MCP_SERVER_URL) in SKILL.md metadata
+- Docs: Clarified credential transmission path (env vars → MCP server; ~/.trader/config.toml stores risk params only)
+- Docs: Aligned MCP_SERVER_URL default (localhost:3000) with hosted URL in SKILL.md
 
 ### v2.0.0 (2026-04-13)
 - Added: Full Binance exchange support (Spot + Futures, MVP-β)
