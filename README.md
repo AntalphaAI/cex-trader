@@ -229,7 +229,7 @@ margin_danger_ratio = 1.02
 ## Security
 
 - API keys are stored in environment variables (`CEX_OKX_*` / `CEX_BINANCE_*`) and transmitted to the MCP server when `cex-setup-save` is called
-- The MCP server URL is `https://mcp.antalpha.com/cex-trader` (hosted) or override via `MCP_SERVER_URL=http://localhost:3000` for self-hosted
+- The MCP server URL is `https://mcp-skills.ai.antalpha.com/mcp` (hosted) or override via `MCP_SERVER_URL=http://localhost:3000` for self-hosted
 - `~/.trader/config.toml` (written by `install.sh`) stores **risk parameters only** — never API keys
 - Withdrawal and transfer permissions **must NOT** be granted to the API key
 - IP allowlist recommended

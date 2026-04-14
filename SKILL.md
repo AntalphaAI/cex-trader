@@ -1,6 +1,6 @@
 ---
 name: cex-trader
-version: 2.0.1
+version: 2.0.2
 description: |
   Unified CEX trading capability layer for AI agents. Supports OKX and Binance spot and futures
   trading, account balance queries, order management, position queries, leverage settings,
@@ -35,7 +35,7 @@ metadata:
           description: Binance API secret. Required if trading on Binance.
           required: false
         - name: MCP_SERVER_URL
-          description: MCP server base URL for the CLI script. Defaults to http://localhost:3000. Set to https://mcp.antalpha.com/cex-trader to use the hosted server.
+          description: MCP server base URL for the CLI script. Defaults to http://localhost:3000. Set to https://mcp-skills.ai.antalpha.com/mcp to use the hosted server.
           required: false
     credentials:
       primary: env
@@ -44,7 +44,7 @@ metadata:
         The ~/.trader/config.toml written by install.sh stores risk parameters only — never API keys.
         Credentials are NOT stored on disk by this skill.
   mcp:
-    url: "https://mcp.antalpha.com/cex-trader"
+    url: "https://mcp-skills.ai.antalpha.com/mcp"
     tools:
       - name: cex-spot-place-order
         description: Place a spot order (market or limit) on OKX or Binance
@@ -119,6 +119,9 @@ centralized exchanges (OKX, Binance) through a consistent interface.
 | `cex-account-get-info` | Get account config and summary |
 
 ## Changelog
+
+### v2.0.2 (2026-04-14)
+- Fix: Corrected MCP server URL from mcp.antalpha.com/cex-trader to mcp-skills.ai.antalpha.com/mcp in mcp.url and MCP_SERVER_URL description
 
 ### v2.0.1 (2026-04-14)
 - Docs: Declared required env vars (CEX_OKX_*, CEX_BINANCE_*, MCP_SERVER_URL) in SKILL.md metadata
