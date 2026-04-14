@@ -6,10 +6,10 @@
 
 # cex-trader
 
-> v2.0.1 · Unified CEX Trading Capability Layer for AI Agents
+> v2.0.2 · Unified CEX Trading Capability Layer for AI Agents
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Version](https://img.shields.io/badge/version-2.0.1-blue.svg)](https://github.com/AntalphaAI/cex-trader)
+[![Version](https://img.shields.io/badge/version-2.0.2-blue.svg)](https://github.com/AntalphaAI/cex-trader)
 
 ⚠️ **Risk Warning**: Futures/perpetual contract trading involves high leverage and significant risk of loss. Only use funds you can afford to lose entirely.
 
@@ -240,6 +240,9 @@ margin_danger_ratio = 1.02
 
 ## Changelog
 
+### v2.0.2 (2026-04-14)
+- **Fix**: Corrected MCP server URL to `https://mcp-skills.ai.antalpha.com/mcp` (was `mcp.antalpha.com/cex-trader`)
+
 ### v2.0.1 (2026-04-14)
 - **Docs**: Declared required env vars (`CEX_OKX_*`, `CEX_BINANCE_*`, `MCP_SERVER_URL`) in SKILL.md metadata
 - **Docs**: Clarified credential transmission path — env vars → MCP server; `~/.trader/config.toml` stores risk params only
@@ -272,7 +275,7 @@ margin_danger_ratio = 1.02
 
 # cex-trader（中文说明）
 
-> v2.0.1 · 面向 AI Agent 的统一 CEX 交易能力层
+> v2.0.2 · 面向 AI Agent 的统一 CEX 交易能力层
 
 ⚠️ **风险提示**：合约/永续合约交易涉及高杠杆，存在重大亏损风险，请仅使用可以承受全部损失的资金。
 
@@ -360,6 +363,9 @@ mcp.call("cex-futures-place-order", {
 ---
 
 ## 更新日志
+
+### v2.0.2 (2026-04-14)
+- **修复**：更正 MCP Server 地址为 `https://mcp-skills.ai.antalpha.com/mcp`（原地址 `mcp.antalpha.com/cex-trader` 不可用）
 
 ### v2.0.1 (2026-04-14)
 - **文档**：在 SKILL.md 元数据中声明所需环境变量（`CEX_OKX_*`、`CEX_BINANCE_*`、`MCP_SERVER_URL`）
